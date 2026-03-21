@@ -9,9 +9,10 @@ export const metadata: Metadata = buildMetadata({
 })
 
 export default async function Page({ searchParams }: {
-    searchParams: Promise<{ hue?: number }>
+    searchParams: Promise<{ hue?: string }>
 }) {
-    const { hue } = await searchParams
+    const { hue: hueParam } = await searchParams
+    const hue = hueParam ? Number(hueParam) : undefined
     const previews = await getAllPreviews()
     return <MainPage previews={previews} hue={hue} />
 }
