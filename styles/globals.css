@@ -1,6 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-pixel: var(--font-pixel), serif;
+  --aspect-poster: 3/4;
+  --spacing-s: var(--padding);
+  --spacing-stn: var(--padding);
+  --spacing-l: calc(4 * var(--padding));
+  --spacing-card-height: var(--card-text-height);
+  --spacing-collection: var(--collection);
+  --color-paper: var(--paper);
+  --color-paper-light: var(--paper-light);
+  --color-fg: var(--foreground);
+  --color-fgl: var(--foreground-light);
+  --width-card: var(--card-width);
+  --text-card: var(--card-font-size);
+}
 
 :root {
   --max-width: 1100px;
