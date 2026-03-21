@@ -1,5 +1,4 @@
 import { href } from '@/utils/refs'
-import Head from 'next/head'
 import { PixelPage } from '@/components/PixelPage'
 import { AboutCard, AboutLink } from '@/components/About'
 import { Metadata } from 'next'
@@ -15,10 +14,6 @@ export default async function AboutPage({ searchParams }: {
 }) {
     const { hue } = await searchParams
     return <PixelPage hue={hue}>
-        <Head>
-            <title>Who is Andjan?</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
         <AboutCard>
             <h1>{`Help me, I don't speak the language!`}</h1>
             <p>{`Hey, this is just my personal page. My name is Anton Shakirzianov, but I use a pen name "Andjan" (or "Анҗан" in Cyrillics).`}</p>

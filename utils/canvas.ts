@@ -57,7 +57,7 @@ export function useCanvases([width, height]: CanvasDimensions, count: number) {
     return result
 }
 
-export function getCanvasFromRef(canvasRef: RefObject<HTMLCanvasElement> | undefined, kind: '2d' | 'webgl') {
+export function getCanvasFromRef(canvasRef: RefObject<HTMLCanvasElement | null> | undefined, kind: '2d' | 'webgl') {
     if (!canvasRef?.current) {
         return undefined
     }
@@ -96,7 +96,7 @@ export function setupCanvas(canvas: HTMLCanvasElement) {
 }
 
 function useRefArray<T>(count: number) {
-    let array = useRef<Array<RefObject<T>>>([])
+    let array = useRef<Array<RefObject<T | null>>>([])
     const refs = array.current
     if (refs.length !== count) {
         for (let idx = 0; idx < count; idx++) {

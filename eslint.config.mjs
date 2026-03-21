@@ -1,6 +1,9 @@
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
+import nextPlugin from '@next/eslint-plugin-next'
+import reactPlugin from 'eslint-plugin-react'
+import hooksPlugin from 'eslint-plugin-react-hooks'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
 import stylistic from '@stylistic/eslint-plugin'
 import parserTs from '@typescript-eslint/parser'
 
@@ -8,21 +11,27 @@ import parserTs from '@typescript-eslint/parser'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-})
-
-// TODO: use new config style?
 const eslintConfig = [
-    ...compat.extends('next/core-web-vitals', 'next/typescript'),
+    {
+        ignores: ['.next/**', 'node_modules/**'],
+    },
     {
         plugins: {
-            '@stylistic/ts': stylistic
+            '@next/next': nextPlugin,
+            'react': reactPlugin,
+            'react-hooks': hooksPlugin,
+            '@typescript-eslint': tsPlugin,
+            '@stylistic/ts': stylistic,
         },
         languageOptions: {
             parser: parserTs,
+            parserOptions: {
+                project: false,
+            },
         },
         rules: {
+            ...nextPlugin.configs.recommended.rules,
+            ...nextPlugin.configs['core-web-vitals'].rules,
             '@stylistic/ts/semi': ['error', 'never'],
             'prefer-const': ['error', {
                 destructuring: 'all'
@@ -52,4 +61,3 @@ const eslintConfig = [
 ]
 
 export default eslintConfig
-
