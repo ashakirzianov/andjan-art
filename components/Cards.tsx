@@ -33,13 +33,13 @@ export function TextCard({ post }: {
             <div className="overflow-hidden text-[0.4em] select-none max-h-card-height py-[3em] px-[5%] w-full">
                 {post.title && <h1 className="mt-[0.5em] mb-[1em] leading-[1em] bold text-[2em]">{post.title}</h1>}
                 <style>{`
-                    p {
+                    .text-card-content p {
                         text-indent: 1em;
                         line-height: 1em;
                         margin-bottom: 0em;
                     }
                 `}</style>
-                <div dangerouslySetInnerHTML={{ __html: post.html }} />
+                <div className="text-card-content" dangerouslySetInnerHTML={{ __html: post.html }} />
             </div>
         </div>
     </Card>

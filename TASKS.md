@@ -24,7 +24,7 @@ Tracked issues from code review. See `REVIEW.md` for full details.
 
 - [x] **Improve launcher cleanup** — `sketcher/launch.ts:58-61` only resets the timer. Null out `state`/`animator`/`layers` references to allow earlier garbage collection.
 
-- [ ] **Scope CSS in TextCard** — `components/Cards.tsx:35-41` uses an inline `<style>` targeting bare `p` elements, which bleeds globally. Scope the styles to the `dangerouslySetInnerHTML` container using a wrapper class (e.g. `.text-card-content p { ... }`).
+- [x] **Scope CSS in TextCard** — `components/Cards.tsx:35-41` uses an inline `<style>` targeting bare `p` elements, which bleeds globally. Scope the styles to the `dangerouslySetInnerHTML` container using a wrapper class (e.g. `.text-card-content p { ... }`).
 
 - [ ] **Remove redundant onMouseOut on AboutCardLink** — `components/Cards.tsx:79-83` has both `onMouseLeave` and `onMouseOut` doing the same thing. Remove `onMouseOut` to avoid redundant calls and potential flickering from bubbling.
 
