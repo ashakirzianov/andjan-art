@@ -28,7 +28,9 @@ Tracked issues from code review. See `REVIEW.md` for full details.
 
 - [x] **Remove redundant onMouseOut on AboutCardLink** — `components/Cards.tsx:79-83` has both `onMouseLeave` and `onMouseOut` doing the same thing. Remove `onMouseOut` to avoid redundant calls and potential flickering from bubbling.
 
-- [ ] **Address global mutable z-index counter** — `components/Draggable.tsx:5` has a module-level `let globalZ = 2` that grows unbounded and resets inconsistently between SPA navigations and hard refreshes.
+## Enhancements
+
+- [ ] **Highlighted cards should pop to front** — When cards are highlighted (zoomed via `transform: scale(1.2)`), they should also get a higher z-index so they render above overlapping neighbors.
 
 ## Experiments (try & evaluate)
 
