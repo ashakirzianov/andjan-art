@@ -1,5 +1,5 @@
 'use client'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { TextPostMap } from '@/utils/text'
 import { Draggable } from '@/components/Draggable'
@@ -7,6 +7,15 @@ import { useRouter } from 'next/navigation'
 import { PixelToggle } from '@/components/Buttons'
 import { href } from '@/utils/refs'
 import { AboutCard, HighlightKind, SketchCard, TextCard } from '@/components/Cards'
+
+function LazySketchCard({ sketchKey, pixelated, placeholder }: {
+    sketchKey: keyof typeof sketchCards,
+    pixelated: boolean,
+    placeholder?: string,
+}) {
+    const scene = useMemo(() => sketchCards[sketchKey].sketch(), [sketchKey])
+    return <SketchCard sketch={scene} pixelated={pixelated} placeholder={placeholder} />
+}
 import { Scene } from '@/sketcher'
 import { loveMeTwoTimes } from '@/sketches/posters/loveMeTwoTimes'
 import { titleAtom } from '@/sketches/atoms'
@@ -17,7 +26,7 @@ import { fourFlowers, letters, number34 } from '@/sketches/misc'
 // @refresh reset
 
 type SketchCardProps = {
-    sketch: Scene<any>,
+    sketch: () => Scene<any>,
     id?: string,
     collection?: string,
     placeholder?: string,
@@ -26,37 +35,37 @@ const sketchCards = {
     posters: {
         id: undefined,
         collection: 'posters',
-        sketch: loveMeTwoTimes(),
+        sketch: () => loveMeTwoTimes(),
         placeholder: '#eee',
     },
     number34: {
         id: 'number34',
         collection: 'misc',
-        sketch: number34(),
+        sketch: () => number34(),
         placeholder: 'rgb(230, 230, 230)',
     },
     atoms: {
         id: undefined,
         collection: 'atoms',
-        sketch: titleAtom(),
+        sketch: () => titleAtom(),
         placeholder: 'rgba(0, 0, 0, 0)',
     },
     typography: {
         id: 'letters',
         collection: 'misc',
-        sketch: letters(),
+        sketch: () => letters(),
         placeholder: '#fff',
     },
     rave: {
         id: 'four-flowers',
         collection: 'misc',
-        sketch: fourFlowers(),
+        sketch: () => fourFlowers(),
         placeholder: '#000',
     },
     rythm: {
         id: undefined,
         collection: 'rythm',
-        sketch: titleRythm(),
+        sketch: () => titleRythm(),
         placeholder: '#000',
     },
 } satisfies Record<string, SketchCardProps>
@@ -81,7 +90,7 @@ export function MainPage({ previews, hue }: {
         position: [number, number],
         order?: number,
     ) {
-        const { id, collection, sketch, placeholder } = sketchCards[key]
+        const { id, collection, placeholder } = sketchCards[key]
         return <Tile
             key={'sketch-' + key}
             shifted={free}
@@ -90,8 +99,8 @@ export function MainPage({ previews, hue }: {
             highlight={hl === 'posters'}
             order={order}
         >
-            <SketchCard
-                sketch={sketch}
+            <LazySketchCard
+                sketchKey={key}
                 pixelated={pixelated}
                 placeholder={placeholder}
             />

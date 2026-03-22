@@ -18,7 +18,7 @@ Tracked issues from code review. See `REVIEW.md` for full details.
 
 - [x] **Add code splitting for sketch collections** — `sketches/index.ts` statically imports all collections, bundling everything together. Use `next/dynamic` or dynamic `import()` to load collections on demand per route.
 
-- [ ] **Defer sketch instantiation on home page** — `app/client.tsx:25-62` calls all sketch factory functions at module scope. Defer instantiation until cards enter the viewport (IntersectionObserver is already wired up in `Card`).
+- [x] **Defer sketch instantiation on home page** — `app/client.tsx:25-62` calls all sketch factory functions at module scope. Defer instantiation until cards enter the viewport (IntersectionObserver is already wired up in `Card`).
 
 ## Design
 
