@@ -56,7 +56,7 @@ In `components/Sketcher.tsx:36`, `launcher()` is called during render (not insid
 <style>p { text-indent: 1em; ... }</style>
 ```
 
-This affects all `<p>` elements on the page, not just within the card. Should be scoped via a CSS class or module.
+This affects all `<p>` elements on the page, not just within the card. The intent is to style `<p>` tags inside the `dangerouslySetInnerHTML` container on line 42. Fix by adding a class to the wrapper div and scoping the styles (e.g. `.text-card-content p { ... }`), or using Tailwind's `prose` / `[&_p]:` utilities.
 
 ### 10. Redundant mouse event handlers on `AboutCardLink`
 

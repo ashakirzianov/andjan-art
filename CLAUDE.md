@@ -58,3 +58,12 @@ This is Anton Shakirzianov's personal website built with Next.js, featuring:
 - **Tailwind CSS** - Styling
 
 The project combines a personal website with a creative coding platform, allowing sketches to be viewed interactively on the web or rendered as static images/videos via CLI.
+
+## Known Issues
+
+See `TASKS.md` for tracked bugs and improvements, and `REVIEW.md` for the full analysis. Key areas:
+
+- **Bugs**: Draggable touchmove listener leak, useSketcherPlayer missing cleanup
+- **Performance**: Animation loop uses setTimeout instead of rAF, gradient objects recreated every frame
+- **Bundle size**: No code splitting for sketch collections, eager sketch instantiation on home page
+- **Design**: Unscoped CSS in TextCard, incomplete launcher cleanup, global mutable z-index counter
