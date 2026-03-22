@@ -1,6 +1,6 @@
 'use client'
-import { LaunchProps, launcher } from '@/sketcher'
-import { useEffect } from 'react'
+import { LaunchProps, Launcher, launcher } from '@/sketcher'
+import { useCallback, useEffect, useRef } from 'react'
 import { getCanvasFromRef, useCanvases } from '@/utils/canvas'
 
 type SketcherProps<S> = Omit<LaunchProps<S>, 'getCanvas'>
@@ -33,19 +33,29 @@ export function useSketcherPlayer<State>(props: SketcherProps<State> & {
     const dimensions = props.dimensions ?? props.scene.dimensions ?? [undefined, undefined]
     const layers = props.scene.layers
     const { node, refs } = useCanvases(dimensions, layers.length)
-    const { start, pause, isPaused, cleanup } = launcher({
-        ...props,
-        getCanvas: idx => getCanvasFromRef(
-            refs[idx],
-            props.scene.layers[idx]?.kind === '3d' ? 'webgl' : '2d',
-        ),
-    })
-    function setPlay(play: boolean) {
-        if (isPaused() && play) {
-            start()
-        } else if (!isPaused() && !play) {
-            pause()
+    const launcherRef = useRef<Launcher | null>(null)
+
+    useEffect(() => {
+        const l = launcher({
+            ...props,
+            getCanvas: idx => getCanvasFromRef(
+                refs[idx],
+                layers[idx]?.kind === '3d' ? 'webgl' : '2d',
+            ),
+        })
+        launcherRef.current = l
+        return l.cleanup
+    }, [node, refs, props.scene, props.period, props.skip, props.chunk])
+
+    const setPlay = useCallback(function setPlay(play: boolean) {
+        const l = launcherRef.current
+        if (!l) return
+        if (l.isPaused() && play) {
+            l.start()
+        } else if (!l.isPaused() && !play) {
+            l.pause()
         }
-    }
-    return { node, setPlay, cleanup }
+    }, [])
+
+    return { node, setPlay }
 }
