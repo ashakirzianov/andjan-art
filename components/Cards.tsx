@@ -6,9 +6,10 @@ import { useSketcherPlayer } from '@/components/Sketcher'
 import { TextPost } from '@/utils/text'
 import Link from 'next/link'
 
-export function SketchCard({ sketch, pixelated }: {
+export function SketchCard({ sketch, pixelated, placeholder }: {
     sketch: Scene<any>,
     pixelated: boolean,
+    placeholder?: string,
 }) {
     const u = 20
     const { node, setPlay } = useSketcherPlayer({
@@ -18,6 +19,7 @@ export function SketchCard({ sketch, pixelated }: {
     const [onVisibilityChanged] = useState(() => setPlay)
     return <Card
         onVisibilityChanged={onVisibilityChanged}
+        backgroundColor={placeholder}
     >
         {node}
     </Card>
@@ -31,13 +33,13 @@ export function TextCard({ post }: {
             <div className="overflow-hidden text-[0.4em] select-none max-h-card-height py-[3em] px-[5%] w-full">
                 {post.title && <h1 className="mt-[0.5em] mb-[1em] leading-[1em] bold text-[2em]">{post.title}</h1>}
                 <style>{`
-                    p {
+                    .text-card-content p {
                         text-indent: 1em;
                         line-height: 1em;
-                        margin-bottom: 1em;
+                        margin-bottom: 0em;
                     }
                 `}</style>
-                <div dangerouslySetInnerHTML={{ __html: post.html }} />
+                <div className="text-card-content" dangerouslySetInnerHTML={{ __html: post.html }} />
             </div>
         </div>
     </Card>
@@ -74,11 +76,6 @@ function AboutCardLink({ children, href, highlight, onHover }: {
                 onHover(undefined)
             }
         }}
-        onMouseOut={function () {
-            if (onHover) {
-                onHover(undefined)
-            }
-        }}
     >
         {children}
     </Link>
@@ -88,9 +85,11 @@ function AboutCardLink({ children, href, highlight, onHover }: {
 function Card({
     children,
     onVisibilityChanged,
+    backgroundColor,
 }: {
     children?: ReactNode;
     onVisibilityChanged?: (isVisible: boolean) => void;
+    backgroundColor?: string;
 }) {
     const THRESHOLD = 0.01
     const cardRef = useRef<HTMLDivElement>(null)
@@ -123,7 +122,7 @@ function Card({
 
     return (
         <div className="pixel-shadow" ref={cardRef}>
-            <div className="flex overflow-hidden aspect-poster w-card text-card pixel-corners">{children}</div>
+            <div className="flex overflow-hidden aspect-poster w-card text-card pixel-corners" style={{ backgroundColor }}>{children}</div>
         </div>
     )
 }

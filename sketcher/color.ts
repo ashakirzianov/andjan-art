@@ -53,16 +53,22 @@ export function isPrimitiveColor(color: Color): color is PrimitiveColor {
     return !((color as any)['kind'] === 'gradient')
 }
 
+const gradientCache = new WeakMap<GradientColor, CanvasGradient>()
+
 export function resolveColor(color: Color, context: Canvas2DContext): ResolvedColor {
     if (isPrimitiveColor(color)) {
         return resolvePrimitiveColor(color)
     } else {
-        const gradient = context.createLinearGradient(
-            color.start[0], color.start[1], color.end[0], color.end[1],
-        )
-        color.stops.forEach(
-            ({ offset, color }) => gradient.addColorStop(offset, resolvePrimitiveColor(color)),
-        )
+        let gradient = gradientCache.get(color)
+        if (!gradient) {
+            gradient = context.createLinearGradient(
+                color.start[0], color.start[1], color.end[0], color.end[1],
+            )
+            color.stops.forEach(
+                ({ offset, color }) => gradient!.addColorStop(offset, resolvePrimitiveColor(color)),
+            )
+            gradientCache.set(color, gradient)
+        }
         return gradient
     }
 }

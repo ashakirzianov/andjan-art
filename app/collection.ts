@@ -1,8 +1,8 @@
 import { sceneId } from '@/sketcher'
-import { collections } from '@/sketches'
+import { getCollection } from '@/sketches/registry'
 
-export function findCollectionSketch(collectionId: string, sketchId: string) {
-    const collection = collections.find(c => c.id === collectionId)
+export async function findCollectionSketch(collectionId: string, sketchId: string) {
+    const collection = await getCollection(collectionId)
     if (!collection) {
         return {}
     }

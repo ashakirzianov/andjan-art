@@ -13,16 +13,23 @@ export type LaunchProps<State> = {
 }
 export type Launcher = ReturnType<typeof launcher>
 export function launcher<State>({
-    scene: { state, animator, layers },
+    scene: { state: initialState, animator: initialAnimator, layers: initialLayers },
     period, skip, chunk,
-    getCanvas,
+    getCanvas: initialGetCanvas,
 }: LaunchProps<State>) {
     let paused = true
+    let cleaned = false
     const timer = makeTimer()
     let frame = 0
+    let state: State | Promise<State> = initialState
+    let animator = initialAnimator
+    let layers = initialLayers
+    let getCanvas = initialGetCanvas
     const renderState = makeRenderState({ layers, getCanvas })
     async function loop(current?: number) {
+        if (cleaned) return
         const awaitedState = await state
+        if (cleaned) return
         if (animator) {
             state = Promise.resolve(animator(awaitedState, {
                 frame,
@@ -57,7 +64,11 @@ export function launcher<State>({
     }
     function cleanup() {
         timer.reset()
-
+        cleaned = true
+        state = undefined as any
+        animator = undefined
+        layers = undefined as any
+        getCanvas = undefined as any
     }
     return { start, pause, isPaused, cleanup }
 }
@@ -106,17 +117,38 @@ function makeRenderState<State>({ layers, getCanvas }: {
     }
 }
 
-// type Timer = ReturnType<typeof makeTimer>
+const hasRAF = typeof requestAnimationFrame === 'function'
+
 function makeTimer() {
-    let timeout: any
+    let id: any
+    let useRAF = false
     function schedule(f: () => void, t: number) {
         reset()
-        timeout = setTimeout(f, t)
+        if (hasRAF && t > 0) {
+            useRAF = true
+            let last = performance.now()
+            const tick = (now: number) => {
+                if (now - last >= t) {
+                    last = now
+                    f()
+                } else {
+                    id = requestAnimationFrame(tick)
+                }
+            }
+            id = requestAnimationFrame(tick)
+        } else {
+            useRAF = false
+            id = setTimeout(f, t)
+        }
     }
     function reset() {
-        if (timeout) {
-            clearTimeout(timeout)
-            timeout = undefined
+        if (id != null) {
+            if (useRAF) {
+                cancelAnimationFrame(id)
+            } else {
+                clearTimeout(id)
+            }
+            id = undefined
         }
     }
     return { schedule, reset }

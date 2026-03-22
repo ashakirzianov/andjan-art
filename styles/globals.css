@@ -1,110 +1,119 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-
-  --foreground-rgb: 0, 0, 0;
-
+@theme {
+  --font-pixel: var(--font-pixel), serif;
+  --aspect-poster: 3/4;
+  --spacing-s: var(--padding);
+  --spacing-stn: var(--padding);
+  --spacing-l: calc(4 * var(--padding));
+  --spacing-card-height: var(--card-text-height);
+  --spacing-collection: var(--collection);
+  --color-paper: var(--paper);
+  --color-paper-light: var(--paper-light);
+  --color-fg: var(--foreground);
+  --color-fgl: var(--foreground-light);
+  --width-card: var(--card-width);
+  --text-card: var(--card-font-size);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+@layer base {
+  :root {
+    --max-width: 1100px;
+    --border-radius: 12px;
+    --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+      'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+      'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-html,
-body {
-  max-width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-}
-
-a {
-  color: skyblue;
-  text-decoration: none;
-}
-
-html {
-  --paper-light: #eee;
-  --background-light: #E6E6E6;
-  --foreground-light: black;
-  --shadow-light: rgba(0, 0, 0, .3);
-  --paper-dark: #000;
-  --background-dark: #383838;
-  --foreground-dark: #CCCCCC;
-  --shadow-dark: rgba(100, 100, 100, .3);
-  --paper: var(--paper-light);
-  --background: var(--background-light);
-  --foreground: var(--foreground-light);
-  --shadow: var(--shadow-light);
-  --radius: 7px;
-  --card-width: 160pt;
-  --card-font-size: 12pt;
-  --card-text-height: 41.7em;
-  --padding: 10pt;
-  --collection: calc(3 * var(--card-width) + 4 * var(--padding));
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    --paper: var(--paper-dark);
-    --background: var(--background-dark);
-    --foreground: var(--foreground-dark);
-    --shadow: var(--shadow-dark);
+    --foreground-rgb: 0, 0, 0;
   }
-}
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-}
+  html,
+  body {
+    max-width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+  }
 
-.pixel-corners {
-  clip-path: polygon(0px 9px,
-      3px 9px,
-      3px 3px,
-      6px 3px,
-      9px 3px,
-      9px 0px,
-      calc(100% - 9px) 0px,
-      calc(100% - 9px) 3px,
-      calc(100% - 3px) 3px,
-      calc(100% - 3px) 6px,
-      calc(100% - 3px) 9px,
-      100% 9px,
-      100% calc(100% - 9px),
-      calc(100% - 3px) calc(100% - 9px),
-      calc(100% - 3px) calc(100% - 3px),
-      calc(100% - 6px) calc(100% - 3px),
-      calc(100% - 9px) calc(100% - 3px),
-      calc(100% - 9px) 100%,
-      9px 100%,
-      9px calc(100% - 3px),
-      3px calc(100% - 3px),
-      3px calc(100% - 6px),
-      3px calc(100% - 9px),
-      0px calc(100% - 9px));
-}
+  body {
+    color: rgb(var(--foreground-rgb));
+  }
 
-.pixel-shadow {
-  filter: drop-shadow(10px 10px 0px #222);
-}
+  a {
+    color: skyblue;
+    text-decoration: none;
+  }
 
-@media (max-width: 350pt) {
   html {
-    --card-width: 100pt;
-    --card-font-size: 7.8pt;
-    --card-text-height: 40.7em;
+    --paper-light: #eee;
+    --background-light: #E6E6E6;
+    --foreground-light: black;
+    --shadow-light: rgba(0, 0, 0, .3);
+    --paper-dark: #000;
+    --background-dark: #383838;
+    --foreground-dark: #CCCCCC;
+    --shadow-dark: rgba(100, 100, 100, .3);
+    --paper: var(--paper-light);
+    --background: var(--background-light);
+    --foreground: var(--foreground-light);
+    --shadow: var(--shadow-light);
+    --radius: 7px;
+    --card-width: 160pt;
+    --card-font-size: 12pt;
+    --card-text-height: 41.7em;
+    --padding: 10pt;
+    --collection: calc(3 * var(--card-width) + 4 * var(--padding));
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      --paper: var(--paper-dark);
+      --background: var(--background-dark);
+      --foreground: var(--foreground-dark);
+      --shadow: var(--shadow-dark);
+    }
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  .pixel-corners {
+    clip-path: polygon(0px 9px,
+        3px 9px,
+        3px 3px,
+        6px 3px,
+        9px 3px,
+        9px 0px,
+        calc(100% - 9px) 0px,
+        calc(100% - 9px) 3px,
+        calc(100% - 3px) 3px,
+        calc(100% - 3px) 6px,
+        calc(100% - 3px) 9px,
+        100% 9px,
+        100% calc(100% - 9px),
+        calc(100% - 3px) calc(100% - 9px),
+        calc(100% - 3px) calc(100% - 3px),
+        calc(100% - 6px) calc(100% - 3px),
+        calc(100% - 9px) calc(100% - 3px),
+        calc(100% - 9px) 100%,
+        9px 100%,
+        9px calc(100% - 3px),
+        3px calc(100% - 3px),
+        3px calc(100% - 6px),
+        3px calc(100% - 9px),
+        0px calc(100% - 9px));
+  }
+
+  .pixel-shadow {
+    filter: drop-shadow(10px 10px 0px #222);
+  }
+
+  @media (max-width: 350pt) {
+    html {
+      --card-width: 100pt;
+      --card-font-size: 7.8pt;
+      --card-text-height: 40.7em;
+    }
   }
 }
