@@ -28,10 +28,6 @@ Tracked issues from code review. See `REVIEW.md` for full details.
 
 - [x] **Remove redundant onMouseOut on AboutCardLink** — `components/Cards.tsx:79-83` has both `onMouseLeave` and `onMouseOut` doing the same thing. Remove `onMouseOut` to avoid redundant calls and potential flickering from bubbling.
 
-## Enhancements
-
-- [ ] **Highlighted cards should pop to front** — When cards are highlighted (zoomed via `transform: scale(1.2)`), they should also get a higher z-index so they render above overlapping neighbors.
-
 ## Experiments (try & evaluate)
 
 - [ ] **[Experiment] Fullscreen expand button for sketches** — Instead of navigating to a separate "poster page" route, try an expand button that shows the sketch fullscreen in-place (e.g. via a modal/overlay). Evaluate whether the UX feels better than the current navigation approach.
