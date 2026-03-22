@@ -22,7 +22,7 @@ Tracked issues from code review. See `REVIEW.md` for full details.
 
 ## Design
 
-- [ ] **Improve launcher cleanup** — `sketcher/launch.ts:58-61` only resets the timer. Null out `state`/`animator`/`layers` references to allow earlier garbage collection.
+- [x] **Improve launcher cleanup** — `sketcher/launch.ts:58-61` only resets the timer. Null out `state`/`animator`/`layers` references to allow earlier garbage collection.
 
 - [ ] **Scope CSS in TextCard** — `components/Cards.tsx:35-41` uses an inline `<style>` targeting bare `p` elements, which bleeds globally. Scope the styles to the `dangerouslySetInnerHTML` container using a wrapper class (e.g. `.text-card-content p { ... }`).
 
