@@ -29,3 +29,9 @@ Tracked issues from code review. See `REVIEW.md` for full details.
 - [ ] **Remove redundant onMouseOut on AboutCardLink** — `components/Cards.tsx:79-83` has both `onMouseLeave` and `onMouseOut` doing the same thing. Remove `onMouseOut` to avoid redundant calls and potential flickering from bubbling.
 
 - [ ] **Address global mutable z-index counter** — `components/Draggable.tsx:5` has a module-level `let globalZ = 2` that grows unbounded and resets inconsistently between SPA navigations and hard refreshes.
+
+## Experiments (try & evaluate)
+
+- [ ] **[Experiment] Fullscreen expand button for sketches** — Instead of navigating to a separate "poster page" route, try an expand button that shows the sketch fullscreen in-place (e.g. via a modal/overlay). Evaluate whether the UX feels better than the current navigation approach.
+
+- [ ] **[Experiment] Carousel swipe for collection sketches** — When viewing a single sketch from a collection (`/sketches/[collection]/[sketch]`), try adding carousel-style horizontal swipe to navigate between sketches in that collection. Evaluate whether it improves browsing flow or feels cluttered.
