@@ -34,6 +34,7 @@ export function useSketcherPlayer<State>(props: SketcherProps<State> & {
     const layers = props.scene.layers
     const { node, refs } = useCanvases(dimensions, layers.length)
     const launcherRef = useRef<Launcher | null>(null)
+    const playingRef = useRef(false)
 
     useEffect(() => {
         const l = launcher({
@@ -44,10 +45,12 @@ export function useSketcherPlayer<State>(props: SketcherProps<State> & {
             ),
         })
         launcherRef.current = l
+        if (playingRef.current) l.start()
         return l.cleanup
     }, [node, refs, props.scene, props.period, props.skip, props.chunk])
 
     const setPlay = useCallback(function setPlay(play: boolean) {
+        playingRef.current = play
         const l = launcherRef.current
         if (!l) return
         if (l.isPaused() && play) {
