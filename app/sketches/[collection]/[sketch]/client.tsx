@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { notFound } from 'next/navigation'
 import { Scene } from '@/sketcher'
 import { Sketcher } from '@/components/Sketcher'
@@ -9,10 +10,16 @@ export function SingleSketch({ collectionId, sketchId }: {
     collectionId: string,
     sketchId: string,
 }) {
-    const { sketch } = findCollectionSketch(collectionId, sketchId)
-    if (!sketch) {
-        return notFound()
-    }
+    const [sketch, setSketch] = useState<Scene | null>(null)
+    const [notFoundState, setNotFoundState] = useState(false)
+    useEffect(() => {
+        findCollectionSketch(collectionId, sketchId).then(({ sketch }) => {
+            if (sketch) setSketch(sketch)
+            else setNotFoundState(true)
+        })
+    }, [collectionId, sketchId])
+    if (notFoundState) return notFound()
+    if (!sketch) return null
     return <SingleSketchImpl scene={sketch} />
 }
 

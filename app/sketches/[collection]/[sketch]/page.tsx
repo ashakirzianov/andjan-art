@@ -12,7 +12,7 @@ export async function generateMetadata({
     }>,
 }): Promise<Metadata> {
     const { collection: collectionId, sketch: sketchId } = await params
-    const { sketch, collection } = findCollectionSketch(collectionId, sketchId)
+    const { sketch, collection } = await findCollectionSketch(collectionId, sketchId)
     return buildMetadata({
         title: sketch?.title ?? collection?.meta.title ?? 'Sketch',
         description: sketch?.description ?? collection?.meta.description ?? 'Generative Sketch',
