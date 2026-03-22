@@ -36,7 +36,7 @@ export function TextCard({ post }: {
                     p {
                         text-indent: 1em;
                         line-height: 1em;
-                        margin-bottom: 1em;
+                        margin-bottom: 0em;
                     }
                 `}</style>
                 <div dangerouslySetInnerHTML={{ __html: post.html }} />
