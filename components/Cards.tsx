@@ -76,11 +76,6 @@ function AboutCardLink({ children, href, highlight, onHover }: {
                 onHover(undefined)
             }
         }}
-        onMouseOut={function () {
-            if (onHover) {
-                onHover(undefined)
-            }
-        }}
     >
         {children}
     </Link>
