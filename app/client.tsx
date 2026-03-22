@@ -20,37 +20,44 @@ type SketchCardProps = {
     sketch: Scene<any>,
     id?: string,
     collection?: string,
+    placeholder?: string,
 }
 const sketchCards = {
     posters: {
         id: undefined,
         collection: 'posters',
         sketch: loveMeTwoTimes(),
+        placeholder: '#eee',
     },
     number34: {
         id: 'number34',
         collection: 'misc',
         sketch: number34(),
+        placeholder: 'rgb(230, 230, 230)',
     },
     atoms: {
         id: undefined,
         collection: 'atoms',
         sketch: titleAtom(),
+        placeholder: 'rgba(0, 0, 0, 0)',
     },
     typography: {
         id: 'letters',
         collection: 'misc',
         sketch: letters(),
+        placeholder: '#fff',
     },
     rave: {
         id: 'four-flowers',
         collection: 'misc',
         sketch: fourFlowers(),
+        placeholder: '#000',
     },
     rythm: {
         id: undefined,
         collection: 'rythm',
         sketch: titleRythm(),
+        placeholder: '#000',
     },
 } satisfies Record<string, SketchCardProps>
 
@@ -74,7 +81,7 @@ export function MainPage({ previews, hue }: {
         position: [number, number],
         order?: number,
     ) {
-        const { id, collection, sketch } = sketchCards[key]
+        const { id, collection, sketch, placeholder } = sketchCards[key]
         return <Tile
             key={'sketch-' + key}
             shifted={free}
@@ -86,6 +93,7 @@ export function MainPage({ previews, hue }: {
             <SketchCard
                 sketch={sketch}
                 pixelated={pixelated}
+                placeholder={placeholder}
             />
         </Tile>
     }
