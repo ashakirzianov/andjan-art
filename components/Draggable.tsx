@@ -118,7 +118,7 @@ export function Draggable({
         return function cleanup() {
             if (ref) {
                 ref.removeEventListener('touchstart', handleTouchStart)
-                ref.removeEventListener('touchmove', handleTouchStart)
+                ref.removeEventListener('touchmove', handleTouchMove)
                 ref.removeEventListener('touchend', handleTouchEnd)
                 ref.removeEventListener('touchcancel', handleTouchEnd)
             }
