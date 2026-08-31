@@ -2,6 +2,28 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Task tracking
+
+Tasks, issues and ideas live in **Linear**, not in this repo. The rule, stated once:
+
+**One project per track, and the project name *is* the track name.** This repo is not yet a track of axis (`../axis/CLAUDE.md`), so it has a project of its own, named after the repo. Either way the mapping is derived from the name — it is not stored here, and duplicating it is exactly what would let it drift.
+
+**Labels:** `startable` (an agent can begin now), `blocked-on-user` (needs Anton specifically), `parked-until-graduates` (held deliberately, not scheduled).
+
+**What does NOT go to Linear.** Durable records stay in the repo, and getting this wrong is how the tracker fills with things nobody can close:
+
+| Class | Test | Home |
+|---|---|---|
+| **TASK** | Open, future-facing. Someone must do something. | Linear |
+| **RECORD** | Past-facing — diagnosis, measurement, ruling, as-built. Value is being read later. | A doc in the repo |
+| **HYBRID** | Open task whose body is mostly record. | Both; the issue links to the doc |
+| **STANDING NOTE** | Neither past nor actionable — a caution that stays true and an agent needs *while working*. | This file, or a doc. **Never Linear** |
+
+Two files at root predate this:
+
+- `TASKS.md` — **retired, not authoritative.** Kept as the migration's rollback; do not capture to it.
+- `REVIEW.md` — a RECORD (a past-facing code-review analysis), not a board. It stays in the repo and is not a source of open work; the actionable half of it is in Linear.
+
 ## Development Commands
 
 - `npm run dev` - Start Next.js development server
@@ -61,7 +83,7 @@ The project combines a personal website with a creative coding platform, allowin
 
 ## Known Issues
 
-See `TASKS.md` for tracked bugs and improvements, and `REVIEW.md` for the full analysis. Key areas:
+Tracked bugs and improvements are Linear issues (see *Task tracking*); `REVIEW.md` holds the full analysis they came from. Key areas:
 
 - **Bugs**: Draggable touchmove listener leak, useSketcherPlayer missing cleanup
 - **Performance**: Animation loop uses setTimeout instead of rAF, gradient objects recreated every frame
