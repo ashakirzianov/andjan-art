@@ -1,12 +1,13 @@
 ---
 track: andjan-art
 slug: andjan-art
+status: dormant
 ---
 
 # andjan-art
 
 Anton's personal site and creative-coding playground.
 
-**Not yet a track.** It has a slug so its work is trackable, but it is not listed as a line of work
-Anton runs; promoting it to a dormant track is itself tracked (`axis/CLAUDE.md` § Not tracks).
-Lifecycle mirrors Divine Intervention: it activates when prioritized. Repo conventions: `CLAUDE.md`.
+**Dormant track** (promoted 2026-09-17). Listed in axis's track index; it activates when Anton
+prioritizes it, the same lifecycle as Divine Intervention. Ideas wait in the tracker under the
+`andjan-art` project. Repo conventions: `CLAUDE.md`.
