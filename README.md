@@ -1,15 +1,3 @@
-This is Anton Shakirzianov's personal page.
+Anton Shakirzianov's personal site, [andjan.art](https://andjan.art), with a creative-coding sketch platform.
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run it locally with `npm run dev`.
