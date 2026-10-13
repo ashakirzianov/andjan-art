@@ -1,13 +1,16 @@
+---
+track: andjan-art
+---
+
 # andjan-art
 
 Anton Shakirzianov's personal site, andjan.art, and his creative-coding platform: a Next.js app whose sketches are viewed interactively on the web or rendered to images and videos through a CLI.
 
 ## Documentation layout
 
-- `TRACK.md` — which track this repo belongs to, and its slug.
-- `AGENTS.md` — this file: the map and the conventions.
+- `AGENTS.md` — this file: the map and the conventions. The track itself (its status and direction) is `andjan-art/about` in xaxis (`get-project`).
 - `SCRATCHPAD.md` — when present, Anton's untracked drafting space; never open it without an explicit ask.
-- `DECISIONS.md`, `docs/`, `archive/` — when present, the decision log, designs and records, and finished efforts.
+- `docs/`, `archive/` — when present, notes about working on this checkout, and finished efforts. Decisions, when the track has any, go to `andjan-art/decisions` in xaxis.
 - `texts/` is site content (the published texts), not documentation.
 
 ## Review posture
